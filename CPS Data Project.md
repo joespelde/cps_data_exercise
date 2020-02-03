@@ -8,7 +8,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 %matplotlib inline
 
-int_df = pd.read_csv('faketeacherData.csv')
+df = pd.read_csv('faketeacherData.csv')
 count_df = pd.read_csv('teacherdatacount.csv')
 ```
 
@@ -16,7 +16,7 @@ count_df = pd.read_csv('teacherdatacount.csv')
 
 
 ```python
-int_df.info()
+df.info()
 ```
 
     <class 'pandas.core.frame.DataFrame'>
@@ -88,7 +88,7 @@ locations = count_df['isbe_rcdts_code'].unique()
 for location in locations:
     print(location) # unique rcdts code
     print(count_df[count_df['isbe_rcdts_code']==location]['no_of_teachers_expected'].sum()) #no. of teachers expected
-    print((int_df.ServingLocationRCDTS == location).sum()) # no. of teachers submitted
+    print((df.ServingLocationRCDTS == location).sum()) # no. of teachers submitted
     
 
 ```
@@ -220,7 +220,7 @@ for location in locations:
 
 ```python
 # Remove entries with missing teacher info in any of the following collumns 
-int_df = int_df.dropna(axis=0, subset=['IEIN','LastName','FirstName','BirthDate',
+df = df.dropna(axis=0, subset=['IEIN','LastName','FirstName','BirthDate',
                                        'SchoolYear','ServingLocationRCDTS','EmployerRCDTS',
                                        'Term','StateCourseCode','SectionNumber',
                                       'TeacherCourseStartDate','EISPositionCode','TeacherCommitment'])
@@ -229,7 +229,7 @@ int_df = int_df.dropna(axis=0, subset=['IEIN','LastName','FirstName','BirthDate'
 
 ```python
 # Progress check of first 50 entries
-int_df.head(50)
+df.head(50)
 ```
 
 
@@ -1232,19 +1232,19 @@ int_df.head(50)
 
 
 ```python
-int_df = int_df[int_df['LocalTeacherID'].apply(lambda x: str(x).isdigit())]
+df = df[df['LocalTeacherID'].apply(lambda x: str(x).isdigit())]
 ```
 
 
 ```python
 # Confirm values are correct
-int_df['LocalTeacherID'].unique()
+df['LocalTeacherID'].unique()
 ```
 
 
 
 
-    array(['804678', '280726', '251432', ..., '760249', 'dprince', '70447'],
+    array(['804678', '280726', '251432', ..., '46538', '760249', '70447'],
           dtype=object)
 
 
@@ -1254,35 +1254,35 @@ int_df['LocalTeacherID'].unique()
 
 ```python
 # Use standard date
-int_df['BirthDate'] = pd.to_datetime(int_df['BirthDate'])
-int_df['BirthDate'] = int_df['BirthDate'].dt.strftime('%m/%d/%Y')
-int_df['TeacherCourseStartDate'] = pd.to_datetime(int_df['TeacherCourseStartDate'])
-int_df['TeacherCourseStartDate'] = int_df['TeacherCourseStartDate'].dt.strftime('%m/%d/%Y')
+df['BirthDate'] = pd.to_datetime(df['BirthDate'])
+df['BirthDate'] = df['BirthDate'].dt.strftime('%m/%d/%Y')
+df['TeacherCourseStartDate'] = pd.to_datetime(df['TeacherCourseStartDate'])
+df['TeacherCourseStartDate'] = df['TeacherCourseStartDate'].dt.strftime('%m/%d/%Y')
 ```
 
 ### Remove values for Term that aren't included in ISBE list
 
 
 ```python
-int_df = int_df[int_df['Term'].str.len() >= 2]  
+df = df[df['Term'].str.len() >= 2]  
 ```
 
 
 ```python
 # confirm unique values for Term are ISBE appropriate
-int_df['Term'].unique()
+df['Term'].unique()
 ```
 
 
 
 
-    array(['S1', 'Y1', 'Q1', '1', '2', '3'], dtype=object)
+    array(['S1', 'Y1', 'Q1'], dtype=object)
 
 
 
 
 ```python
-int_df.head()
+df.head()
 ```
 
 
@@ -1322,7 +1322,6 @@ int_df.head()
       <th>TeacherCourseStartDate</th>
       <th>EISPositionCode</th>
       <th>TeacherCommitment</th>
-      <th>Network</th>
     </tr>
   </thead>
   <tbody>
@@ -1344,10 +1343,9 @@ int_df.head()
       <td>08/20/2018</td>
       <td>201.0</td>
       <td>1.00</td>
-      <td>Options</td>
     </tr>
     <tr>
-      <th>1</th>
+      <th>2</th>
       <td>369472.0</td>
       <td>280726</td>
       <td>Rios</td>
@@ -1364,10 +1362,9 @@ int_df.head()
       <td>01/21/2018</td>
       <td>200.0</td>
       <td>1.00</td>
-      <td>Options</td>
     </tr>
     <tr>
-      <th>2</th>
+      <th>3</th>
       <td>509509.0</td>
       <td>251432</td>
       <td>Morris</td>
@@ -1384,10 +1381,9 @@ int_df.head()
       <td>01/13/2018</td>
       <td>200.0</td>
       <td>0.36</td>
-      <td>Options</td>
     </tr>
     <tr>
-      <th>3</th>
+      <th>4</th>
       <td>922488.0</td>
       <td>303080</td>
       <td>Fernandez</td>
@@ -1404,10 +1400,9 @@ int_df.head()
       <td>08/20/2018</td>
       <td>200.0</td>
       <td>1.00</td>
-      <td>Charter</td>
     </tr>
     <tr>
-      <th>4</th>
+      <th>5</th>
       <td>689032.0</td>
       <td>344652</td>
       <td>Garrison</td>
@@ -1424,7 +1419,6 @@ int_df.head()
       <td>08/20/2018</td>
       <td>200.0</td>
       <td>1.00</td>
-      <td>Options</td>
     </tr>
   </tbody>
 </table>
@@ -1445,7 +1439,7 @@ position_codes = [200,201,202,203,204,207,208,250,
 
 ```python
 # Unique position codes from TeacherData
-p_codes = int_df['EISPositionCode'].unique()
+p_codes = df['EISPositionCode'].unique()
 print(p_codes)
 ```
 
@@ -1455,13 +1449,13 @@ print(p_codes)
 
 ```python
 # Remove position codes that equal 205
-int_df =int_df[int_df['EISPositionCode']!=205]
+df = df[df['EISPositionCode']!=205]
 ```
 
 
 ```python
 # Confirm position codes
-int_df['EISPositionCode'].unique()
+df['EISPositionCode'].unique()
 ```
 
 
@@ -1475,7 +1469,7 @@ int_df['EISPositionCode'].unique()
 
 
 ```python
-int_df['StateCourseCode'].unique()
+df['StateCourseCode'].unique()
 ```
 
 
@@ -1511,7 +1505,7 @@ int_df['StateCourseCode'].unique()
 
 ```python
 # Check first two string values to make sure they match ISBE Course Codes
-int_df[(int_df['StateCourseCode']).str.startswith('04')]['SectionNumber'].unique()
+df[(df['StateCourseCode']).str.startswith('04')]['SectionNumber'].unique()
 
 ```
 
@@ -1538,19 +1532,19 @@ count_df = count_df.rename(columns={"isbe_rcdts_code": "ServingLocationRCDTS"})
 
 ```python
 # Merge datasets on ServingLocationRCDTS (like Vlookup)
-int_df = pd.merge(int_df,count_df[['ServingLocationRCDTS','Network']],on='ServingLocationRCDTS', how='left')
+df = pd.merge(df,count_df[['ServingLocationRCDTS','Network']],on='ServingLocationRCDTS', how='left')
 ```
 
 ### Drop Empy Columns
 
 
 ```python
-int_df = int_df.drop(columns=['LocalCourseID','LocalCourseTitle'])
+df = df.drop(columns=['LocalCourseID','LocalCourseTitle'])
 ```
 
 ### Export to CSV
 
 
 ```python
-int_df.to_csv('isbe.csv')
+df.to_csv('isbe.csv')
 ```

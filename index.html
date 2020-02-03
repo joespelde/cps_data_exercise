@@ -13097,7 +13097,7 @@ div#notebook {
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="o">%</span><span class="k">matplotlib</span> inline
 
-<span class="n">int_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;faketeacherData.csv&#39;</span><span class="p">)</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;faketeacherData.csv&#39;</span><span class="p">)</span>
 <span class="n">count_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;teacherdatacount.csv&#39;</span><span class="p">)</span>
 </pre></div>
 
@@ -13118,7 +13118,7 @@ div#notebook {
 <div class="prompt input_prompt">In&nbsp;[2]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">int_df</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
 </pre></div>
 
     </div>
@@ -13254,14 +13254,14 @@ memory usage: 2.0+ KB
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="prompt input_prompt">In&nbsp;[7]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Loop through and compare number of teachers expected to number of teachers submitted for each unique rcdts code</span>
 <span class="k">for</span> <span class="n">location</span> <span class="ow">in</span> <span class="n">locations</span><span class="p">:</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">location</span><span class="p">)</span> <span class="c1"># unique rcdts code</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">count_df</span><span class="p">[</span><span class="n">count_df</span><span class="p">[</span><span class="s1">&#39;isbe_rcdts_code&#39;</span><span class="p">]</span><span class="o">==</span><span class="n">location</span><span class="p">][</span><span class="s1">&#39;no_of_teachers_expected&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span> <span class="c1">#no. of teachers expected</span>
-    <span class="nb">print</span><span class="p">((</span><span class="n">int_df</span><span class="o">.</span><span class="n">ServingLocationRCDTS</span> <span class="o">==</span> <span class="n">location</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span> <span class="c1"># no. of teachers submitted</span>
+    <span class="nb">print</span><span class="p">((</span><span class="n">df</span><span class="o">.</span><span class="n">ServingLocationRCDTS</span> <span class="o">==</span> <span class="n">location</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span> <span class="c1"># no. of teachers submitted</span>
     
 </pre></div>
 
@@ -13416,11 +13416,11 @@ memory usage: 2.0+ KB
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[7]:</div>
+<div class="prompt input_prompt">In&nbsp;[8]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Remove entries with missing teacher info in any of the following collumns </span>
-<span class="n">int_df</span> <span class="o">=</span> <span class="n">int_df</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;IEIN&#39;</span><span class="p">,</span><span class="s1">&#39;LastName&#39;</span><span class="p">,</span><span class="s1">&#39;FirstName&#39;</span><span class="p">,</span><span class="s1">&#39;BirthDate&#39;</span><span class="p">,</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;IEIN&#39;</span><span class="p">,</span><span class="s1">&#39;LastName&#39;</span><span class="p">,</span><span class="s1">&#39;FirstName&#39;</span><span class="p">,</span><span class="s1">&#39;BirthDate&#39;</span><span class="p">,</span>
                                        <span class="s1">&#39;SchoolYear&#39;</span><span class="p">,</span><span class="s1">&#39;ServingLocationRCDTS&#39;</span><span class="p">,</span><span class="s1">&#39;EmployerRCDTS&#39;</span><span class="p">,</span>
                                        <span class="s1">&#39;Term&#39;</span><span class="p">,</span><span class="s1">&#39;StateCourseCode&#39;</span><span class="p">,</span><span class="s1">&#39;SectionNumber&#39;</span><span class="p">,</span>
                                       <span class="s1">&#39;TeacherCourseStartDate&#39;</span><span class="p">,</span><span class="s1">&#39;EISPositionCode&#39;</span><span class="p">,</span><span class="s1">&#39;TeacherCommitment&#39;</span><span class="p">])</span>
@@ -13433,11 +13433,11 @@ memory usage: 2.0+ KB
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[8]:</div>
+<div class="prompt input_prompt">In&nbsp;[9]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Progress check of first 50 entries</span>
-<span class="n">int_df</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -13450,7 +13450,7 @@ memory usage: 2.0+ KB
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[8]:</div>
+    <div class="prompt output_prompt">Out[9]:</div>
 
 
 
@@ -14462,10 +14462,10 @@ memory usage: 2.0+ KB
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[9]:</div>
+<div class="prompt input_prompt">In&nbsp;[14]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">int_df</span> <span class="o">=</span> <span class="n">int_df</span><span class="p">[</span><span class="n">int_df</span><span class="p">[</span><span class="s1">&#39;LocalTeacherID&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">isdigit</span><span class="p">())]</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;LocalTeacherID&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">isdigit</span><span class="p">())]</span>
 </pre></div>
 
     </div>
@@ -14475,11 +14475,11 @@ memory usage: 2.0+ KB
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[10]:</div>
+<div class="prompt input_prompt">In&nbsp;[15]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Confirm values are correct</span>
-<span class="n">int_df</span><span class="p">[</span><span class="s1">&#39;LocalTeacherID&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;LocalTeacherID&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
 </pre></div>
 
     </div>
@@ -14492,7 +14492,7 @@ memory usage: 2.0+ KB
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[10]:</div>
+    <div class="prompt output_prompt">Out[15]:</div>
 
 
 
@@ -14517,14 +14517,14 @@ memory usage: 2.0+ KB
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[11]:</div>
+<div class="prompt input_prompt">In&nbsp;[17]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Use standard date</span>
-<span class="n">int_df</span><span class="p">[</span><span class="s1">&#39;BirthDate&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">int_df</span><span class="p">[</span><span class="s1">&#39;BirthDate&#39;</span><span class="p">])</span>
-<span class="n">int_df</span><span class="p">[</span><span class="s1">&#39;BirthDate&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">int_df</span><span class="p">[</span><span class="s1">&#39;BirthDate&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%m/</span><span class="si">%d</span><span class="s1">/%Y&#39;</span><span class="p">)</span>
-<span class="n">int_df</span><span class="p">[</span><span class="s1">&#39;TeacherCourseStartDate&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">int_df</span><span class="p">[</span><span class="s1">&#39;TeacherCourseStartDate&#39;</span><span class="p">])</span>
-<span class="n">int_df</span><span class="p">[</span><span class="s1">&#39;TeacherCourseStartDate&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">int_df</span><span class="p">[</span><span class="s1">&#39;TeacherCourseStartDate&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%m/</span><span class="si">%d</span><span class="s1">/%Y&#39;</span><span class="p">)</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;BirthDate&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;BirthDate&#39;</span><span class="p">])</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;BirthDate&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;BirthDate&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%m/</span><span class="si">%d</span><span class="s1">/%Y&#39;</span><span class="p">)</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;TeacherCourseStartDate&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;TeacherCourseStartDate&#39;</span><span class="p">])</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;TeacherCourseStartDate&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;TeacherCourseStartDate&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%m/</span><span class="si">%d</span><span class="s1">/%Y&#39;</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -14541,10 +14541,10 @@ memory usage: 2.0+ KB
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[12]:</div>
+<div class="prompt input_prompt">In&nbsp;[19]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">int_df</span> <span class="o">=</span> <span class="n">int_df</span><span class="p">[</span><span class="n">int_df</span><span class="p">[</span><span class="s1">&#39;Term&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">len</span><span class="p">()</span> <span class="o">&gt;=</span> <span class="mi">2</span><span class="p">]</span>  
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Term&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">len</span><span class="p">()</span> <span class="o">&gt;=</span> <span class="mi">2</span><span class="p">]</span>  
 </pre></div>
 
     </div>
@@ -14554,11 +14554,11 @@ memory usage: 2.0+ KB
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[13]:</div>
+<div class="prompt input_prompt">In&nbsp;[20]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># confirm unique values for Term are ISBE appropriate</span>
-<span class="n">int_df</span><span class="p">[</span><span class="s1">&#39;Term&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;Term&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
 </pre></div>
 
     </div>
@@ -14571,7 +14571,7 @@ memory usage: 2.0+ KB
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[13]:</div>
+    <div class="prompt output_prompt">Out[20]:</div>
 
 
 
@@ -14588,10 +14588,10 @@ memory usage: 2.0+ KB
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[14]:</div>
+<div class="prompt input_prompt">In&nbsp;[21]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">int_df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 
     </div>
@@ -14604,7 +14604,7 @@ memory usage: 2.0+ KB
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[14]:</div>
+    <div class="prompt output_prompt">Out[21]:</div>
 
 
 
@@ -14781,7 +14781,7 @@ memory usage: 2.0+ KB
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Unique position codes from TeacherData</span>
-<span class="n">p_codes</span> <span class="o">=</span> <span class="n">int_df</span><span class="p">[</span><span class="s1">&#39;EISPositionCode&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
+<span class="n">p_codes</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;EISPositionCode&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">p_codes</span><span class="p">)</span>
 </pre></div>
 
@@ -14810,11 +14810,11 @@ memory usage: 2.0+ KB
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[17]:</div>
+<div class="prompt input_prompt">In&nbsp;[22]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Remove position codes that equal 205</span>
-<span class="n">int_df</span> <span class="o">=</span><span class="n">int_df</span><span class="p">[</span><span class="n">int_df</span><span class="p">[</span><span class="s1">&#39;EISPositionCode&#39;</span><span class="p">]</span><span class="o">!=</span><span class="mi">205</span><span class="p">]</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;EISPositionCode&#39;</span><span class="p">]</span><span class="o">!=</span><span class="mi">205</span><span class="p">]</span>
 </pre></div>
 
     </div>
@@ -14824,11 +14824,11 @@ memory usage: 2.0+ KB
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[18]:</div>
+<div class="prompt input_prompt">In&nbsp;[23]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Confirm position codes</span>
-<span class="n">int_df</span><span class="p">[</span><span class="s1">&#39;EISPositionCode&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;EISPositionCode&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
 </pre></div>
 
     </div>
@@ -14841,7 +14841,7 @@ memory usage: 2.0+ KB
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[18]:</div>
+    <div class="prompt output_prompt">Out[23]:</div>
 
 
 
@@ -14865,10 +14865,10 @@ memory usage: 2.0+ KB
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[19]:</div>
+<div class="prompt input_prompt">In&nbsp;[24]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">int_df</span><span class="p">[</span><span class="s1">&#39;StateCourseCode&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;StateCourseCode&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
 </pre></div>
 
     </div>
@@ -14881,7 +14881,7 @@ memory usage: 2.0+ KB
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[19]:</div>
+    <div class="prompt output_prompt">Out[24]:</div>
 
 
 
@@ -14921,11 +14921,11 @@ memory usage: 2.0+ KB
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[20]:</div>
+<div class="prompt input_prompt">In&nbsp;[25]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Check first two string values to make sure they match ISBE Course Codes</span>
-<span class="n">int_df</span><span class="p">[(</span><span class="n">int_df</span><span class="p">[</span><span class="s1">&#39;StateCourseCode&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;04&#39;</span><span class="p">)][</span><span class="s1">&#39;SectionNumber&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
+<span class="n">df</span><span class="p">[(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;StateCourseCode&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;04&#39;</span><span class="p">)][</span><span class="s1">&#39;SectionNumber&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
 </pre></div>
 
     </div>
@@ -14938,7 +14938,7 @@ memory usage: 2.0+ KB
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[20]:</div>
+    <div class="prompt output_prompt">Out[25]:</div>
 
 
 
@@ -14967,7 +14967,7 @@ memory usage: 2.0+ KB
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[21]:</div>
+<div class="prompt input_prompt">In&nbsp;[27]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Rename column for merge function</span>
@@ -14981,11 +14981,11 @@ memory usage: 2.0+ KB
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[22]:</div>
+<div class="prompt input_prompt">In&nbsp;[28]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Merge datasets on ServingLocationRCDTS (like Vlookup)</span>
-<span class="n">int_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">int_df</span><span class="p">,</span><span class="n">count_df</span><span class="p">[[</span><span class="s1">&#39;ServingLocationRCDTS&#39;</span><span class="p">,</span><span class="s1">&#39;Network&#39;</span><span class="p">]],</span><span class="n">on</span><span class="o">=</span><span class="s1">&#39;ServingLocationRCDTS&#39;</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">)</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df</span><span class="p">,</span><span class="n">count_df</span><span class="p">[[</span><span class="s1">&#39;ServingLocationRCDTS&#39;</span><span class="p">,</span><span class="s1">&#39;Network&#39;</span><span class="p">]],</span><span class="n">on</span><span class="o">=</span><span class="s1">&#39;ServingLocationRCDTS&#39;</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -15002,10 +15002,10 @@ memory usage: 2.0+ KB
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[23]:</div>
+<div class="prompt input_prompt">In&nbsp;[29]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">int_df</span> <span class="o">=</span> <span class="n">int_df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;LocalCourseID&#39;</span><span class="p">,</span><span class="s1">&#39;LocalCourseTitle&#39;</span><span class="p">])</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;LocalCourseID&#39;</span><span class="p">,</span><span class="s1">&#39;LocalCourseTitle&#39;</span><span class="p">])</span>
 </pre></div>
 
     </div>
@@ -15022,10 +15022,10 @@ memory usage: 2.0+ KB
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[24]:</div>
+<div class="prompt input_prompt">In&nbsp;[30]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">int_df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;isbe.csv&#39;</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;isbe.csv&#39;</span><span class="p">)</span>
 </pre></div>
 
     </div>
