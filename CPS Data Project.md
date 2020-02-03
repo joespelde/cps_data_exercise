@@ -1535,7 +1535,8 @@ count_df = count_df.rename(columns={"isbe_rcdts_code": "ServingLocationRCDTS"})
 df = pd.merge(df,count_df[['ServingLocationRCDTS','Network']],on='ServingLocationRCDTS', how='left')
 ```
 
-### Drop Empy Columns
+### Drop Empty Columns
+
 
 
 ```python
